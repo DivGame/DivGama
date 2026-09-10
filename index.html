@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DivGama Anime Battle</title>
+<style>
+body{margin:0;background:#111;color:white;font-family:Arial;text-align:center}
+canvas{max-width:100%;background:linear-gradient(#182848,#4b6cb7)}
+h2{margin:8px}
+</style>
+</head>
+<body>
+
+<h2>⚔️ DivGama Anime Battle ⚔️</h2>
+<canvas id="game" width="900" height="500"></canvas>
+
+<script>
+const c=document.getElementById("game");
+const ctx=c.getContext("2d");
+
+let player={x:120,y:350,w:45,h:65,hp:100};
+let enemy={x:700,y:350,w:45,h:65,hp:100};
+let keys={},score=0;
+
+document.addEventListener("keydown",e=>{
+ keys[e.key.toLowerCase()]=true;
+ if(e.key==" ") attack();
+});
+document.addEventListener("keyup",e=>{
+ keys[e.key.toLowerCase()]=false;
+});
+
+function attack(){
+ if(Math.abs(player.x-enemy.x)<100){
+   enemy.hp-=10;
+   if(enemy.hp<=0){
+     score++;
+     enemy.hp=100;
+     enemy.x=500+Math.random()*300;
+   }
+ }
+}
+
+function update(){
+ if(keys["a"]||keys["arrowleft"])player.x-=5;
+ if(keys["d"]||keys["arrowright"])player.x+=5;
+ if(keys["w"]||keys["arrowup"])player.y-=5;
+ if(keys["s"]||keys["arrowdown"])player.y+=5;
+
+ player.x=Math.max(0,Math.min(c.width-player.w,player.x));
+ player.y=Math.max(100
+                   
